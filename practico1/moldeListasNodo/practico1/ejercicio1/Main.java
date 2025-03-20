@@ -9,7 +9,9 @@ public class Main {
         System.out.println(miLista.toString());
        
         System.out.println(miLista.get(1));
-        
+        System.out.println(miLista.isEmpty());
+        System.out.println(miLista.extractFront());
+        System.out.println(miLista.toString());
        
     }
 }

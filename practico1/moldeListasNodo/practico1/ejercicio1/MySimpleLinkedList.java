@@ -1,5 +1,8 @@
 package practico1.ejercicio1;
-public class MySimpleLinkedList<T> {
+
+import java.util.Iterator;
+
+public class MySimpleLinkedList<T> implements Iterable<T>{
 	
 	private Node<T> first;
 	private int tamanio;
@@ -47,6 +50,7 @@ public class MySimpleLinkedList<T> {
 	public int size() {
 		return this.tamanio;
 	}
+	//ejercicio 3
 	public int indexOf(T elemento){
 		Node<T> auxPrimeraPos = this.first;
 		int indice = 0;
@@ -75,6 +79,11 @@ public class MySimpleLinkedList<T> {
 			temp = temp.getNext();
 		}
 		return auxToString;
+	}
+	//ejercicio 4
+	@Override
+	public Iterator<T> iterator() {
+		return new IteratorList<>(this.first);
 	}
 	
 }
