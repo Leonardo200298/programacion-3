@@ -32,24 +32,14 @@ public class MySimpleLinkedList<T> {
 	}
 	
 	public T get(int index) {
-		int contador = 0;
+		//int contador = 0;
 		Node<T> temp = this.first;
 		//Node<T> temp = new Node<>(this.first.getInfo(), this.first.getNext());
-		if (this.first == null || index > this.size()) {
+		if (temp == null || index > this.size()) {
 			return null;
-			
 		}
-
-		/* 
-		otra solucion
-		 * 		for (int i = 0; i < index; i++) {
+		for (int i = 0; i < index; i++) {
 			temp = temp.getNext();
-		}
-			return temp.getInfo();
-		 */
-		while (index != contador && temp != null) {
-			contador++;
-			temp = first.getNext();
 		}
 		return temp.getInfo();
 	}
@@ -57,12 +47,32 @@ public class MySimpleLinkedList<T> {
 	public int size() {
 		return this.tamanio;
 	}
-	
+	public int indexOf(T elemento){
+		Node<T> auxPrimeraPos = this.first;
+		int indice = 0;
+		for (int i = 0; i < size(); i++) {
+			if (auxPrimeraPos.getInfo() == elemento) {
+				indice++;
+				auxPrimeraPos = auxPrimeraPos.getNext();
+			}
+		}
+		return indice;
+	}
 	@Override
 	public String toString() {
+		Node<T> temp = this.first;
 		String auxToString = "";
-		for (int i = 0; i < this.size(); i++) {
-			auxToString = this.first.toString();
+		if (this.isEmpty()) {
+			return null;
+		}
+		while (temp != null) {
+			auxToString += temp.getInfo();
+
+			if (temp.getNext() != null) {
+				auxToString += ", ";
+			}
+
+			temp = temp.getNext();
 		}
 		return auxToString;
 	}

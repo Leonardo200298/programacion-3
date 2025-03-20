@@ -5,3 +5,7 @@ complejidad computacional contra un array en las siguientes operaciones:
 3. Determinar la cantidad de elementos.
 4. Borrar un elemento de una posición determinada.
 
+1-O(n)
+2-O(n)
+3-O(1)
+4-O(n)
