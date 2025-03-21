@@ -3,10 +3,12 @@ public class Node<T> {
 
 	private T info;
 	private Node<T> next;
+	private Node<T> prev;
 
 	public Node() {
 		this.info = null;
 		this.next = null;
+		this.prev = null;
 	}
 	
 	public Node(T info, Node<T> next) {
@@ -28,6 +30,14 @@ public class Node<T> {
 
 	public void setInfo(T info) {
 		this.info = info;
+	}
+
+	public Node<T> getPrev() {
+		return prev;
+	}
+
+	public void setPrev(Node<T> prev) {
+		this.prev = prev;
 	}
 
 
