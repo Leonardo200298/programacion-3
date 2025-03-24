@@ -2,11 +2,13 @@ package practico1.ejercicio1;
 
 public class DoubleLinkedList<T> {
     private Node<T> first;
+    private Node<T> last;
     private int tamanio;
 
     public DoubleLinkedList() {
         this.first = null;
         this.tamanio = 0;
+        this.last = null;
     }
 
     public void insertFront(T info) {
@@ -44,17 +46,32 @@ public class DoubleLinkedList<T> {
     }
 
     public T get(int index) {
-		//int contador = 0;
-		Node<T> temp = this.first;
-		//Node<T> temp = new Node<>(this.first.getInfo(), this.first.getNext());
-		if (temp == null || index > this.size()) {
-			return null;
-		}
-		for (int i = 0; i < index; i++) {
-			temp = temp.getNext();
-		}
-		return temp.getInfo();
-	}
+        if (index < 0 || index >= this.tamanio) {
+            return null;
+        }
+        
+        int conI = 0;
+        int conF = this.tamanio - 1;
+        Node<T> i = this.first;
+        Node<T> f = this.last;
+    
+        while (conI <= conF) {
+            if (conI == index) {
+                return i.getInfo();
+            }
+            if (conF == index) {
+                return f.getInfo();
+            }
+    
+            i = i.getNext();
+            f = f.getPrev();
+            conI++;
+            conF--;
+        }
+        
+        return null; 
+    }
+    
     public int size() {
 		return this.tamanio;
 	}
