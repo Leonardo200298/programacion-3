@@ -76,3 +76,4 @@ public class DoubleLinkedList<T> {
 		return this.tamanio;
 	}
 }
+
