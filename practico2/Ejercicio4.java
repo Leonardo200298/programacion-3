@@ -4,13 +4,13 @@ public class Ejercicio4 {
     public static void main(String[] args) {
         
     }
-    public static int fibonacciSeis(int n){
-        if (n == 5) {
-            return n;
+    public static int fibonacci(int n){
+        if (n == 1) {
+            return 1;
         }
-        if (n> 5 && n> -1) {
+        if (n == 0) {
             return 0;
         }
-        return fibonacciSeis(n) * fibonacciSeis(n+n-1);
+        return fibonacci(n-1) + fibonacci(n-2);
     }
 }
