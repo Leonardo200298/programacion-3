@@ -14,7 +14,25 @@ public class Tree {
 		else
 			this.add(this.root, value);
 	}
+	public boolean hasElem(Integer value){
+		return this.hasElement(this.root, value);
 
+	}
+	private boolean hasElement(TreeNode actual, Integer value){
+		if (actual == null) {
+			return false;
+		}
+		if (actual.getValue().equals(value)) {
+			return true;
+		}
+		if (actual.getValue() < value) {
+			return hasElement(actual.getLeft(), value);
+		}else{
+			return hasElement(actual.getRight(), value);
+		}
+
+
+	}
 	private void add(TreeNode actual, Integer value) {
 		if (actual.getValue() > value) {
 			if (actual.getLeft() == null) {
