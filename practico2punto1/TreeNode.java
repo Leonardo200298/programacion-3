@@ -1,36 +1,38 @@
 package practico2punto1;
 
-public class TreeNode {
+public class TreeNode<T> {
 
-	private Integer value;
-	private TreeNode left;
-	private TreeNode right;
+	private T value;
+	private TreeNode<T> left;
+	private TreeNode<T> right;
 
-	public TreeNode(Integer value) {
+	public TreeNode(T value) {
 		this.value = value;
 		this.left = null;
 		this.right = null;
 	}
 
-	public TreeNode getLeft() {
+	public TreeNode<T> getLeft() {
 		return left;
 	}
 
-	public void setLeft(TreeNode left) {
+	public void setLeft(TreeNode<T> left) {
 		this.left = left;
 	}
 
-	public TreeNode getRight() {
+	public TreeNode<T> getRight() {
 		return right;
 	}
 
-	public void setRight(TreeNode right) {
+	public void setRight(TreeNode<T> right) {
 		this.right = right;
 	}
 
-	public Integer getValue() {
+	public T getValue() {
 		return value;
 	}
 
-
+	public void setValue(T valor){
+		this.value = valor;
+	}
 }
