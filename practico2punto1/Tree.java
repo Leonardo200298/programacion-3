@@ -1,11 +1,15 @@
 package practico2punto1;
 
+import java.util.List;
+
 public class Tree<T extends Comparable<T>> {
 
 	private TreeNode<T> root;
-
+	private LinkedList<T> list;
 	public Tree() {
 		this.root = null;
+		this.list = null;
+
 	}
 
 	public void add(T value) {
@@ -120,5 +124,20 @@ public class Tree<T extends Comparable<T>> {
 	
 		return Math.max(izquierda, derecha) + 1;
 	}
-	
+	public LinkedList<T> getLongestBranch(){
+		return getLongestBranchTree(this.root, this.list);
+
+	}
+	private LinkedList<T> getLongestBranchTree(TreeNode<T> actual, LinkedList<T> internList){
+		if (actual == null) {
+			return null;
+		}
+		//pensar if recursivo para acumular valor de las ramas izquierdas
+		//se hace como la impresion por preorden
+		/* if () {
+			
+		} */
+
+		return null;
+	}
 }
