@@ -1,14 +1,15 @@
 package practico2punto1;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Tree<T extends Comparable<T>> {
 
 	private TreeNode<T> root;
-	private LinkedList<T> list;
+
 	public Tree() {
 		this.root = null;
-		this.list = null;
+
 
 	}
 
@@ -19,8 +20,8 @@ public class Tree<T extends Comparable<T>> {
 			this.add(this.root, value);
 	}
 
-	public boolean delete(Integer value) {
-		return true;
+	public boolean delete(T value) {
+		return this.delete(value, this.root);
 	}
 
 	private boolean delete(T elem, TreeNode<T> node) {
@@ -124,20 +125,46 @@ public class Tree<T extends Comparable<T>> {
 	
 		return Math.max(izquierda, derecha) + 1;
 	}
-	public LinkedList<T> getLongestBranch(){
-		return getLongestBranchTree(this.root, this.list);
 
-	}
-	private LinkedList<T> getLongestBranchTree(TreeNode<T> actual, LinkedList<T> internList){
-		if (actual == null) {
-			return null;
-		}
-		//pensar if recursivo para acumular valor de las ramas izquierdas
-		//se hace como la impresion por preorden
-		/* if () {
-			
-		} */
+	
+public List<T> getLongestBranch() {
+    return getLongestBranch(this.root, new ArrayList<>());
+}
 
-		return null;
-	}
+private List<T> getLongestBranch(TreeNode<T> nodo, List<T> ramaActual) {
+    if (nodo == null) {
+        return ramaActual;
+    }
+
+    ramaActual.add(nodo.getValue());
+
+    List<T> ramaIzquierda = getLongestBranch(nodo.getLeft(), new ArrayList<T>(ramaActual));
+    List<T> ramaDerecha = getLongestBranch(nodo.getRight(), new ArrayList<T>(ramaActual));
+
+    List<T> listaGanadora;
+
+    if (ramaIzquierda.size() > ramaDerecha.size()) {
+        listaGanadora = ramaIzquierda;
+    } else {
+        listaGanadora = ramaDerecha;
+    }
+
+    return listaGanadora;
+}
+
+	
+	/* func getLongestBranch(nodo):
+    si nodo es null:
+        retornar lista vacía
+
+    ramaIzquierda = getLongestBranch(nodo.izquierdo)
+    ramaDerecha = getLongestBranch(nodo.derecho)
+
+    listaGanadora = la más larga entre ramaIzquierda y ramaDerecha
+
+    nuevaLista = clonar listaGanadora
+    nuevaLista.insertFront(nodo.valor)
+
+    retornar nuevaLista
+ */
 }
