@@ -2,6 +2,7 @@ package practico2punto1;
 
 public class Main {
     public static void main(String[] args) {
+        /* prueba main */
         Tree arbol = new Tree();
         arbol.add(5);
         arbol.add(2);
