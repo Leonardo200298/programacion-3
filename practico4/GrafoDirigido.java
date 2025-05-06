@@ -1,22 +1,46 @@
 package practico4;
 
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
+import java.util.LinkedList;
 
 public class GrafoDirigido<T> implements Grafo<T> {
+	private Map<Integer,List<Arco<T>>> adyacentes;
+	
+	public GrafoDirigido(){
+		this.adyacentes = new HashMap<>();
+	}
+	
 
 	@Override
 	public void agregarVertice(int verticeId) {
-		// TODO Auto-generated method stub
+		if (!this.contieneVertice(verticeId)) {
+			this.adyacentes.put(verticeId,new LinkedList<Arco<T>>());
+		}
 	}
 
 	@Override
 	public void borrarVertice(int verticeId) {
-		// TODO Auto-generated method stub
+		this.adyacentes.remove(verticeId);
+		for (Integer vertice : this.adyacentes.keySet()) {
+			List<Arco<T>> arcos = this.adyacentes.get(vertice);
+			for (Arco<T> arco : arcos) {
+				if (arco.getVerticeDestino() == verticeId) {
+					arcos.remove(arco);
+				}
+			}
+		}
 	}
 
 	@Override
 	public void agregarArco(int verticeId1, int verticeId2, T etiqueta) {
-		// TODO Auto-generated method stub
+		//el vertice uno siempre sera la key del hashmap
+		if (!this.contieneVertice(verticeId1)) {
+			this.adyacentes.get(verticeId1).add(new Arco<T>(verticeId1, verticeId2, etiqueta));
+		}
 	}
 
 	@Override
@@ -26,8 +50,7 @@ public class GrafoDirigido<T> implements Grafo<T> {
 
 	@Override
 	public boolean contieneVertice(int verticeId) {
-		// TODO Auto-generated method stub
-		return false;
+		return this.adyacentes.containsKey(verticeId);
 	}
 
 	@Override
