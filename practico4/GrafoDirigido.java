@@ -45,36 +45,56 @@ public class GrafoDirigido<T> implements Grafo<T> {
 
 	@Override
 	public void borrarArco(int verticeId1, int verticeId2) {
-		// TODO Auto-generated method stub
+		if (this.contieneVertice(verticeId1)) {
+			List<Arco<T>> arcos = this.adyacentes.get(verticeId1);
+			//me queda O(a a la 2)
+			arcos.remove(this.obtenerArco(verticeId1, verticeId2));
+		}
 	}
 
 	@Override
 	public boolean contieneVertice(int verticeId) {
 		return this.adyacentes.containsKey(verticeId);
+		
 	}
 
 	@Override
 	public boolean existeArco(int verticeId1, int verticeId2) {
-		// TODO Auto-generated method stub
+		if (this.contieneVertice(verticeId1)) {
+			List<Arco<T>> arcos = this.adyacentes.get(verticeId1);
+			for (Arco<T> arco : arcos) {
+				if (arco.getVerticeDestino() == verticeId1) {
+					return true;
+				}
+			}
+		}
 		return false;
 	}
 
 	@Override
 	public Arco<T> obtenerArco(int verticeId1, int verticeId2) {
-		// TODO Auto-generated method stub
+		if (this.contieneVertice(verticeId1)) {
+			for (Arco<T> arco : this.adyacentes.get(verticeId1)) {
+				if (arco.getVerticeDestino() == verticeId1) {
+					return arco;
+				}
+			}
+		}
 		return null;
 	}
 
 	@Override
 	public int cantidadVertices() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.adyacentes.size();
 	}
 
 	@Override
 	public int cantidadArcos() {
-		// TODO Auto-generated method stub
-		return 0;
+		int cantArcos = 0;
+		for (List<Arco<T>> arco : this.adyacentes.values()) {
+			cantArcos += arco.size();
+		}
+		return cantArcos;
 	}
 
 	@Override
