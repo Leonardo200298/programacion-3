@@ -1,10 +1,11 @@
 package practico4;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
+import java.util.Set;
 import java.util.LinkedList;
 
 public class GrafoDirigido<T> implements Grafo<T> {
@@ -99,26 +100,32 @@ public class GrafoDirigido<T> implements Grafo<T> {
 
 	@Override
 	public Iterator<Integer> obtenerVertices() {
-		// TODO Auto-generated method stub
-		return null;
+		Set<Integer> vertices = this.adyacentes.keySet();
+		return vertices.iterator();
 	}
 
 	@Override
 	public Iterator<Integer> obtenerAdyacentes(int verticeId) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Integer> arrEnteros = new ArrayList<>();
+		for (List<Arco<T>> arcos : this.adyacentes.values()) {
+			arrEnteros.add(arcos.get(verticeId).getVerticeDestino());
+		}
+		return arrEnteros.iterator();
 	}
 
 	@Override
 	public Iterator<Arco<T>> obtenerArcos() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Arco<T>> arcos = new ArrayList<>();
+		for (List<Arco<T>> arcoList : this.adyacentes.values()) {
+			arcos.addAll(arcoList);
+		}
+		return arcos.iterator();
 	}
 
 	@Override
 	public Iterator<Arco<T>> obtenerArcos(int verticeId) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return new ArrayList<>(this.adyacentes.get(verticeId)).iterator();
 	}
 
 }
