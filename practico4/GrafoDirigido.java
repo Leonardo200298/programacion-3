@@ -106,11 +106,10 @@ public class GrafoDirigido<T> implements Grafo<T> {
 
 	@Override
 	public Iterator<Integer> obtenerAdyacentes(int verticeId) {
-		ArrayList<Integer> arrEnteros = new ArrayList<>();
-		for (List<Arco<T>> arcos : this.adyacentes.values()) {
-			arrEnteros.add(arcos.get(verticeId).getVerticeDestino());
-		}
-		return arrEnteros.iterator();
+		List<Arco<T>> retorno = adyacentes.get(verticeId);
+		if(retorno != null)
+			return new ArcoIterator<>(retorno.iterator());
+		return null;
 	}
 
 	@Override
