@@ -1,6 +1,7 @@
 package practico4;
 
 import java.util.Iterator;
+import java.util.Map;
 
 public interface Grafo<T> {
 	
@@ -43,5 +44,6 @@ public interface Grafo<T> {
 	// Obtiene un iterador que me permite recorrer todos los arcos que parten desde verticeId
 	public Iterator<Arco<T>> obtenerArcos(int verticeId);
 	
+	public Map<Integer, Aux> DFS();
 	
 }

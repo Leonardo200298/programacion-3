@@ -127,4 +127,49 @@ public class GrafoDirigido<T> implements Grafo<T> {
 		return new ArrayList<>(this.adyacentes.get(verticeId)).iterator();
 	}
 
+
+	@Override
+	public Map<Integer, Aux> DFS() {
+		Map<Integer, Aux> resultado = new HashMap<>();
+	
+		Iterator<Integer> it = this.obtenerVertices();
+	
+		// Inicializar colores y tiempos
+		while (it.hasNext()) {
+			Integer v = it.next();
+			resultado.put(v, new Aux("blanco", -1, -1));
+		}
+	
+		int tiempo = 0;
+		for (Integer v : resultado.keySet()) {
+			if (resultado.get(v).getColor().equals("blanco")) {
+				tiempo = DFSVisit(v, tiempo, resultado);
+			}
+		}
+	
+		return resultado;
+	}
+	private int DFSVisit(Integer v, int tiempo, Map<Integer, Aux> resultado) {
+		Aux aux = resultado.get(v);
+		aux.setColor("amarillo");
+		tiempo++;
+		aux.setTI(tiempo);
+	
+		Iterator<Integer> ady = this.obtenerAdyacentes(v);
+		while (ady != null && ady.hasNext()) {
+			Integer w = ady.next();
+			Aux auxW = resultado.get(w);
+			if (auxW.getColor().equals("blanco")) {
+				tiempo = DFSVisit(w, tiempo, resultado);
+			}
+		}
+	
+		aux.setColor("negro");
+		tiempo++;
+		aux.setTF(tiempo);
+	
+		return tiempo;
+	}
+		
+	
 }
