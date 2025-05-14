@@ -149,15 +149,15 @@ public class GrafoDirigido<T> implements Grafo<T> {
 	
 		return resultado;
 	}
-	private int DFSVisit(Integer v, int tiempo, Map<Integer, Aux> resultado) {
-		Aux aux = resultado.get(v);
+	private int DFSVisit(Integer origen, int tiempo, Map<Integer, Aux> resultado) {
+		Aux aux = resultado.get(origen);
 		aux.setColor("amarillo");
 		tiempo++;
 		aux.setTI(tiempo);
 	
-		Iterator<Integer> ady = this.obtenerAdyacentes(v);
-		while (ady != null && ady.hasNext()) {
-			Integer w = ady.next();
+		Iterator<Integer> camino = this.obtenerAdyacentes(origen);
+		while (camino.hasNext()) {
+			Integer w = camino.next();
 			Aux auxW = resultado.get(w);
 			if (auxW.getColor().equals("blanco")) {
 				tiempo = DFSVisit(w, tiempo, resultado);
