@@ -5,14 +5,17 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
 import java.util.Set;
 import java.util.LinkedList;
 
 public class GrafoDirigido<T> implements Grafo<T> {
 	private Map<Integer,List<Arco<T>>> adyacentes;
 	
+	
 	public GrafoDirigido(){
 		this.adyacentes = new HashMap<>();
+
 	}
 	
 
@@ -97,7 +100,9 @@ public class GrafoDirigido<T> implements Grafo<T> {
 		}
 		return cantArcos;
 	}
-
+	public Set<Integer> getVertices(){
+		return this.adyacentes.keySet();
+	}
 	@Override
 	public Iterator<Integer> obtenerVertices() {
 		Set<Integer> vertices = this.adyacentes.keySet();
@@ -170,6 +175,15 @@ public class GrafoDirigido<T> implements Grafo<T> {
 	
 		return tiempo;
 	}
+
+
+
+	
+
+
+
+
 		
+	
 	
 }
