@@ -1,5 +1,3 @@
-package practico4;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -109,13 +107,21 @@ public class GrafoDirigido<T> implements Grafo<T> {
 		return vertices.iterator();
 	}
 
-	@Override
-	public Iterator<Integer> obtenerAdyacentes(int verticeId) {
-		List<Arco<T>> retorno = adyacentes.get(verticeId);
-		if(retorno != null)
-			return new ArcoIterator<>(retorno.iterator());
-		return null;
+@Override
+public Iterator<Integer> obtenerAdyacentes(int verticeId) {
+	List<Arco<T>> listaArcos = adyacentes.get(verticeId);
+
+	if (listaArcos == null)
+		return new ArrayList<Integer>().iterator();
+
+	List<Integer> adyacentes = new ArrayList<>();
+	for (Arco<T> arco : listaArcos) {
+		adyacentes.add(arco.getVerticeDestino());
 	}
+
+	return adyacentes.iterator();
+}
+
 
 	@Override
 	public Iterator<Arco<T>> obtenerArcos() {
@@ -176,14 +182,4 @@ public class GrafoDirigido<T> implements Grafo<T> {
 		return tiempo;
 	}
 
-
-
-	
-
-
-
-
-		
-	
-	
 }

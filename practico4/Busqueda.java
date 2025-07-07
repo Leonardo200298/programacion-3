@@ -8,12 +8,12 @@ import java.util.Queue;
 
 public class Busqueda {
     public void BFS(GrafoDirigido grafo) {
-        Map<Integer, Aux> resultado = new HashMap<>();
+        Map<Integer, Auxiliar> resultado = new HashMap<>();
         Queue<Integer> fila = new LinkedList<>();
         Iterator<Integer> iterator = grafo.obtenerVertices();
         while (iterator.hasNext()) {
             Integer vertice = iterator.next();
-            resultado.put(vertice, new Aux("No valido", 0, 0));
+            resultado.put(vertice, new Auxiliar("No valido", 0, 0));
         }
 
         for (Integer vertice : resultado.keySet()) {
@@ -33,7 +33,7 @@ public class Busqueda {
 
             while (adyacentes.hasNext()) {
                 Integer adyacente = adyacentes.next();
-                Aux auxAdyacente = resultado.get(adyacente);
+                Auxiliar auxAdyacente = resultado.get(adyacente);
 
                 if (auxAdyacente != null && auxAdyacente.getColor().equals("No valido")) {
                     auxAdyacente.setColor("visitado");
