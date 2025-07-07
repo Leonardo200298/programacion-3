@@ -1,10 +1,10 @@
 package practico4;
 
-public class Aux {
+public class Auxiliar {
 	private String color;
 	private int TI;
 	private int TF;
-	public Aux(String color,int TI,int TF) {
+	public Auxiliar(String color,int TI,int TF) {
 		this.color = color;
 		this.TI = TI;
 		this.TF =TF;
