@@ -8,19 +8,17 @@ import java.util.Set;
 import java.util.LinkedList;
 
 public class GrafoDirigido<T> implements Grafo<T> {
-	private Map<Integer,List<Arco<T>>> adyacentes;
-	
-	
-	public GrafoDirigido(){
+	private Map<Integer, List<Arco<T>>> adyacentes;
+
+	public GrafoDirigido() {
 		this.adyacentes = new HashMap<>();
 
 	}
-	
 
 	@Override
 	public void agregarVertice(int verticeId) {
 		if (!this.contieneVertice(verticeId)) {
-			this.adyacentes.put(verticeId,new LinkedList<Arco<T>>());
+			this.adyacentes.put(verticeId, new LinkedList<Arco<T>>());
 		}
 	}
 
@@ -39,7 +37,7 @@ public class GrafoDirigido<T> implements Grafo<T> {
 
 	@Override
 	public void agregarArco(int verticeId1, int verticeId2, T etiqueta) {
-		//el vertice uno siempre sera la key del hashmap
+		// el vertice uno siempre sera la key del hashmap
 		if (!this.contieneVertice(verticeId1)) {
 			this.adyacentes.get(verticeId1).add(new Arco<T>(verticeId1, verticeId2, etiqueta));
 		}
@@ -49,7 +47,7 @@ public class GrafoDirigido<T> implements Grafo<T> {
 	public void borrarArco(int verticeId1, int verticeId2) {
 		if (this.contieneVertice(verticeId1)) {
 			List<Arco<T>> arcos = this.adyacentes.get(verticeId1);
-			//me queda O(a a la 2)
+			// me queda O(a a la 2)
 			arcos.remove(this.obtenerArco(verticeId1, verticeId2));
 		}
 	}
@@ -57,7 +55,7 @@ public class GrafoDirigido<T> implements Grafo<T> {
 	@Override
 	public boolean contieneVertice(int verticeId) {
 		return this.adyacentes.containsKey(verticeId);
-		
+
 	}
 
 	@Override
@@ -98,30 +96,31 @@ public class GrafoDirigido<T> implements Grafo<T> {
 		}
 		return cantArcos;
 	}
-	public Set<Integer> getVertices(){
+
+	public Set<Integer> getVertices() {
 		return this.adyacentes.keySet();
 	}
+
 	@Override
 	public Iterator<Integer> obtenerVertices() {
 		Set<Integer> vertices = this.adyacentes.keySet();
 		return vertices.iterator();
 	}
 
-@Override
-public Iterator<Integer> obtenerAdyacentes(int verticeId) {
-	List<Arco<T>> listaArcos = adyacentes.get(verticeId);
+	@Override
+	public Iterator<Integer> obtenerAdyacentes(int verticeId) {
+		List<Arco<T>> listaArcos = adyacentes.get(verticeId);
 
-	if (listaArcos == null)
-		return new ArrayList<Integer>().iterator();
+		if (listaArcos == null)
+			return new ArrayList<Integer>().iterator();
 
-	List<Integer> adyacentes = new ArrayList<>();
-	for (Arco<T> arco : listaArcos) {
-		adyacentes.add(arco.getVerticeDestino());
+		List<Integer> adyacentes = new ArrayList<>();
+		for (Arco<T> arco : listaArcos) {
+			adyacentes.add(arco.getVerticeDestino());
+		}
+
+		return adyacentes.iterator();
 	}
-
-	return adyacentes.iterator();
-}
-
 
 	@Override
 	public Iterator<Arco<T>> obtenerArcos() {
@@ -134,38 +133,38 @@ public Iterator<Integer> obtenerAdyacentes(int verticeId) {
 
 	@Override
 	public Iterator<Arco<T>> obtenerArcos(int verticeId) {
-		
+
 		return new ArrayList<>(this.adyacentes.get(verticeId)).iterator();
 	}
-
 
 	@Override
 	public Map<Integer, Auxiliar> DFS() {
 		Map<Integer, Auxiliar> resultado = new HashMap<>();
-	
+
 		Iterator<Integer> it = this.obtenerVertices();
-	
+
 		// Inicializar colores y tiempos
 		while (it.hasNext()) {
 			Integer v = it.next();
 			resultado.put(v, new Auxiliar("blanco", -1, -1));
 		}
-	
+
 		int tiempo = 0;
 		for (Integer v : resultado.keySet()) {
 			if (resultado.get(v).getColor().equals("blanco")) {
 				tiempo = DFSVisit(v, tiempo, resultado);
 			}
 		}
-	
+
 		return resultado;
 	}
+
 	private int DFSVisit(Integer origen, int tiempo, Map<Integer, Auxiliar> resultado) {
 		Auxiliar aux = resultado.get(origen);
 		aux.setColor("amarillo");
 		tiempo++;
 		aux.setTI(tiempo);
-	
+
 		Iterator<Integer> camino = this.obtenerAdyacentes(origen);
 		while (camino.hasNext()) {
 			Integer w = camino.next();
@@ -174,11 +173,11 @@ public Iterator<Integer> obtenerAdyacentes(int verticeId) {
 				tiempo = DFSVisit(w, tiempo, resultado);
 			}
 		}
-	
+
 		aux.setColor("negro");
 		tiempo++;
 		aux.setTF(tiempo);
-	
+
 		return tiempo;
 	}
 

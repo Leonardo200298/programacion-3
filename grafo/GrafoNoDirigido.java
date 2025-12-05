@@ -1,3 +1,8 @@
+/**
+ *@see GrafoDirigido<T>
+ * 
+*/
+
 public class GrafoNoDirigido<T> extends GrafoDirigido<T> {
 
 	@Override
